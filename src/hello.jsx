@@ -1,8 +1,12 @@
 import React from 'react';
 
 export default class Hello extends React.Component {
+	// constructor() {
+	// 	super()
+	// 	this.props.msg
+	// }
   render() {
-    return <h1>Hello</h1>
+    return <div></div>
   }
 }
 

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 export default class ChatMsg extends React.Component { 
 	// constructor(props) {
 	//    super(props);
-	//    this.state = { messsage:''}
+	//    this.refs.message.value= data
 	//  	}
 	handleSubmit(e) {
 		e.preventDefault();
@@ -14,9 +14,11 @@ export default class ChatMsg extends React.Component { 
 		}
 		console.log(message);
 		//传递给上层： emit(message)
-		this.props.onMessageSubmit({
-			message:message,
-		});
+		this.props.onMessageSubmit(message);
+		// socket.emit('msg',{
+		// 	'message':message,
+		// 	'userName':theUserName
+		// })
 		this.refs.message.value = '';
 		return;
 	}

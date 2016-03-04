@@ -64,9 +64,9 @@
 
 	var _hello2 = _interopRequireDefault(_hello);
 
-	var _input = __webpack_require__(210);
+	var _message = __webpack_require__(210);
 
-	var _input2 = _interopRequireDefault(_input);
+	var _message2 = _interopRequireDefault(_message);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,57 +76,99 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// class LogIn extends React.Component {
-
-	// }
-	// ReactDOM.render(<LogIn />, document.getElementById('chat'));
-
 	var socket = _socket2.default.connect('ws://localhost:8000');
+	var logStateInfo = true;
+	var theUserName = null;
 
-	// function init() {
-	// 	// LonIn 传出数据到 IO ，再检测数据合法性。
-	// 	var socket = io.connect('ws://localhost:8000');
-	// 	socket.emit('test', {
-	// 		password: 'password',
-	// 		username: 'usename',
-	// 	});
-	// 	// 获取判断结果，判断用户是否是合法用户
+	var LogIn = function (_React$Component) {
+		_inherits(LogIn, _React$Component);
+
+		function LogIn() {
+			_classCallCheck(this, LogIn);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LogIn).call(this));
+
+			socket.on('logstate', function (info) {
+				if (info === 'false') {
+					logStateInfo = false;
+					alert('嘀嘀嘀，学生卡，账号余额不足，请充值');
+				} else if (info === 'same') {
+					logStateInfo = false;
+					alert('报告长官，此账号已登录');
+				} else {
+					_reactDom2.default.render(_react2.default.createElement(Box, null), document.getElementById('chat'));
+				}
+				console.log(info);
+			});
+			return _this;
+		}
+
+		_createClass(LogIn, [{
+			key: 'logIn',
+			value: function logIn(e) {
+				e.preventDefault();
+				var userName = this.refs.userName.value.trim();
+				var userPassword = this.refs.userPassword.value.trim();
+				theUserName = userName;
+				socket.emit('login', {
+					'userName': userName,
+					'userPassword': userPassword
+				});
+				return;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h1',
+						null,
+						'遇见你真好'
+					),
+					_react2.default.createElement(
+						'form',
+						{ className: 'commentForm', onSubmit: this.logIn.bind(this) },
+						_react2.default.createElement('input', { type: 'text', placeholder: '账号', ref: 'userName' }),
+						_react2.default.createElement('input', { type: 'text', placeholder: '密码', ref: 'userPassword' }),
+						_react2.default.createElement('input', { value: '发射', type: 'submit' })
+					)
+				);
+			}
+		}]);
+
+		return LogIn;
+	}(_react2.default.Component);
+
+	_reactDom2.default.render(_react2.default.createElement(LogIn, null), document.getElementById('chat'));
+
+	// if(logStateInfo) {
+	// 	ReactDOM.render(<Box />, document.getElementById('chat'));
 	// }
-	// // 设置当前用户，
-	// init();
 
-	var Box = function (_React$Component) {
-		_inherits(Box, _React$Component);
+	var Box = function (_React$Component2) {
+		_inherits(Box, _React$Component2);
 
 		function Box() {
 			_classCallCheck(this, Box);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Box).call(this));
+			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Box).call(this));
 
-			socket.on('testSend', function (data) {
-				_this.setState({
-					data: data
-				});
-				console.log(data);
+			socket.on('msg', function (msg) {
+				console.log(msg);
 			});
-			return _this;
+			return _this2;
 		}
 
 		_createClass(Box, [{
 			key: 'handleMessageSubmit',
 			value: function handleMessageSubmit(message) {
-				socket.emit('test', message);
+				socket.emit('msg', {
+					'message': message,
+					'userName': theUserName
+				});
 			}
-			// handleMessageSubmit(msg) {
-			// 	console.log(msg)
-			// }
-
-			// 自动调用
-			// componentDidMount() {
-			// 	this.loadCommentsFromServer();
-			// 	setInterval(this.loadCommentsFromServer.bind(this), this.props.pollInterval);
-			// }
-
 		}, {
 			key: 'render',
 			value: function render() {
@@ -134,15 +176,13 @@
 					'div',
 					null,
 					_react2.default.createElement(_hello2.default, null),
-					_react2.default.createElement(_input2.default, { onMessageSubmit: this.handleMessageSubmit.bind(this) })
+					_react2.default.createElement(_message2.default, { onMessageSubmit: this.handleMessageSubmit.bind(this) })
 				);
 			}
 		}]);
 
 		return Box;
 	}(_react2.default.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(Box, null), document.getElementById('chat'));
 
 /***/ },
 /* 1 */
@@ -27449,7 +27489,7 @@
 
 			// constructor(props) {
 			//    super(props);
-			//    this.state = { messsage:''}
+			//    this.refs.message.value= data
 			//  	}
 			value: function handleSubmit(e) {
 				e.preventDefault();
@@ -27459,9 +27499,11 @@
 				}
 				console.log(message);
 				//传递给上层： emit(message)
-				this.props.onMessageSubmit({
-					message: message
-				});
+				this.props.onMessageSubmit(message);
+				// socket.emit('msg',{
+				// 	'message':message,
+				// 	'userName':theUserName
+				// })
 				this.refs.message.value = '';
 				return;
 			}
