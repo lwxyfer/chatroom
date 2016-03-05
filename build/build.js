@@ -64,7 +64,11 @@
 
 	var _hello2 = _interopRequireDefault(_hello);
 
-	var _message = __webpack_require__(210);
+	var _onlineuserlist = __webpack_require__(210);
+
+	var _onlineuserlist2 = _interopRequireDefault(_onlineuserlist);
+
+	var _message = __webpack_require__(211);
 
 	var _message2 = _interopRequireDefault(_message);
 
@@ -79,6 +83,20 @@
 	var socket = _socket2.default.connect('ws://localhost:8000');
 	var logStateInfo = true;
 	var theUserName = null;
+	var onlineUser = null;
+
+	socket.on('logstate', function (info) {
+		if (info === 'false') {
+			logStateInfo = false;
+			alert('嘀嘀嘀，学生卡，账号或者密码不正确');
+		} else if (info === 'same') {
+			logStateInfo = false;
+			alert('报告长官，此账号已登录');
+		} else {
+			_reactDom2.default.render(_react2.default.createElement(Box, null), document.getElementById('chat'));
+		}
+		console.log('logstate: ' + info);
+	});
 
 	var LogIn = function (_React$Component) {
 		_inherits(LogIn, _React$Component);
@@ -86,21 +104,7 @@
 		function LogIn() {
 			_classCallCheck(this, LogIn);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LogIn).call(this));
-
-			socket.on('logstate', function (info) {
-				if (info === 'false') {
-					logStateInfo = false;
-					alert('嘀嘀嘀，学生卡，账号余额不足，请充值');
-				} else if (info === 'same') {
-					logStateInfo = false;
-					alert('报告长官，此账号已登录');
-				} else {
-					_reactDom2.default.render(_react2.default.createElement(Box, null), document.getElementById('chat'));
-				}
-				console.log(info);
-			});
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(LogIn).apply(this, arguments));
 		}
 
 		_createClass(LogIn, [{
@@ -143,10 +147,6 @@
 
 	_reactDom2.default.render(_react2.default.createElement(LogIn, null), document.getElementById('chat'));
 
-	// if(logStateInfo) {
-	// 	ReactDOM.render(<Box />, document.getElementById('chat'));
-	// }
-
 	var Box = function (_React$Component2) {
 		_inherits(Box, _React$Component2);
 
@@ -155,13 +155,45 @@
 
 			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Box).call(this));
 
-			socket.on('msg', function (msg) {
-				console.log(msg);
-			});
+			_this2.state = {
+				onlineuser: []
+			};
 			return _this2;
 		}
+		// static update(onuser) {
+		// 		// let self = this;
+		// 		this.setState({
+		// 			onlineuser: onuser
+		// 		})
+		// 	}
+		// componentDidMount() {
+		// 	setInterval(this.update.bind(this), 100);
+		// }
+
 
 		_createClass(Box, [{
+			key: 'getUser',
+			value: function getUser() {
+				var _this3 = this;
+
+				socket.on('loginUser', function (onuser) {
+					console.log('在线用户: ' + onuser);
+					console.log('人数' + onuser.length);
+					_this3.setState({
+						onlineuser: onuser,
+						onlinenum: onuser.length
+					});
+				});
+				socket.on('msg', function (msg) {
+					console.log(msg.message, msg.userName);
+				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.getUser();
+			}
+		}, {
 			key: 'handleMessageSubmit',
 			value: function handleMessageSubmit(message) {
 				socket.emit('msg', {
@@ -176,6 +208,7 @@
 					'div',
 					null,
 					_react2.default.createElement(_hello2.default, null),
+					_react2.default.createElement(_onlineuserlist2.default, { name: 'lw', userList: this.state.onlineuser, userNum: this.state.onlinenum }),
 					_react2.default.createElement(_message2.default, { onMessageSubmit: this.handleMessageSubmit.bind(this) })
 				);
 			}
@@ -183,6 +216,49 @@
 
 		return Box;
 	}(_react2.default.Component);
+
+	socket.emit('disconnect', theUserName);
+
+	// userList={ this.state.onUser }
+	// class Chat extends React.Component {
+	// 	constructor() {
+	// 		super()
+	// 		this.state = {
+	// 			router:'/log'
+	// 		}
+	// 		socket.on(`logstate`, info => {
+	// 			if (info === 'false') {
+	// 				logStateInfo = false
+	// 				alert('嘀嘀嘀，学生卡，账号余额不足，请充值')
+	// 			} else if (info === 'same') {
+	// 				logStateInfo = false
+	// 				alert('报告长官，此账号已登录')
+	// 			} else {
+	// 				ReactDOM.render(<Box />, document.getElementById('chat'));
+	// 			}
+	// 			console.log(info)
+	// 		})
+	// 	}
+	// 	render() {
+	// 		let Child
+	// 		switch (this.state.route) {
+	// 			case '/room':
+	// 				Child = Box;
+	// 				break;
+	// 			case '/log':
+	// 				Child = LogIn;
+	// 				break;
+	// 			default:
+	// 				Child = LogIn;
+	// 		}
+	// 		return (
+	// 			<div>
+	//       <h1>App</h1>
+	//       <Child/>
+	//     </div>
+	// 		)
+	// 	}
+	// }
 
 /***/ },
 /* 1 */
@@ -27405,7 +27481,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27423,32 +27499,139 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Hello = function (_React$Component) {
-	  _inherits(Hello, _React$Component);
+		_inherits(Hello, _React$Component);
 
-	  function Hello() {
-	    _classCallCheck(this, Hello);
+		function Hello() {
+			_classCallCheck(this, Hello);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).apply(this, arguments));
-	  }
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).apply(this, arguments));
+		}
 
-	  _createClass(Hello, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Hello'
-	      );
-	    }
-	  }]);
+		_createClass(Hello, [{
+			key: 'render',
 
-	  return Hello;
+			// constructor() {
+			// 	super()
+			// 	this.props.msg
+			// }
+			value: function render() {
+				return _react2.default.createElement('div', null);
+			}
+		}]);
+
+		return Hello;
 	}(_react2.default.Component);
 
 	exports.default = Hello;
 
 /***/ },
 /* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(51);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(208);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var OnlineUserList = function (_React$Component) {
+		_inherits(OnlineUserList, _React$Component);
+
+		function OnlineUserList() {
+			_classCallCheck(this, OnlineUserList);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(OnlineUserList).apply(this, arguments));
+		}
+
+		_createClass(OnlineUserList, [{
+			key: 'render',
+			value: function render() {
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'span',
+						null,
+						'在线人数：',
+						this.props.userNum
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'userList' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'在线用户列表：'
+						),
+						_react2.default.createElement(
+							'ul',
+							null,
+							this.props.userList.map(function (result) {
+								return _react2.default.createElement(MessageList, { key: result, data: result });
+							})
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						this.props.name
+					)
+				);
+			}
+		}]);
+
+		return OnlineUserList;
+	}(_react2.default.Component);
+
+	exports.default = OnlineUserList;
+
+	var MessageList = function (_React$Component2) {
+		_inherits(MessageList, _React$Component2);
+
+		function MessageList() {
+			_classCallCheck(this, MessageList);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(MessageList).apply(this, arguments));
+		}
+
+		_createClass(MessageList, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'li',
+					null,
+					this.props.data
+				);
+			}
+		}]);
+
+		return MessageList;
+	}(_react2.default.Component);
+	// var userNodes = this.props.userList.map((onuser) => {
+	// 	return (<li>{onuser}</li>)
+	// });
+
+/***/ },
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
