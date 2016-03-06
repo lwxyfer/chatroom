@@ -94,7 +94,7 @@
 			alert('报告长官，此账号已登录');
 		} else {
 			console.log('登陆L号飞船，起飞');
-			_reactDom2.default.render(_react2.default.createElement(Box, null), document.body);
+			_reactDom2.default.render(_react2.default.createElement(Box, null), document.getElementById('chat'));
 		}
 	});
 
@@ -132,6 +132,16 @@
 						'你好'
 					),
 					_react2.default.createElement(
+						'p',
+						null,
+						' 自定义账号:'
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						' \'习近平\': \'123\', \'奥巴马\': \'123\', \'致远星\': \'123\', \'战列舰\': \'123\', \'卡特\': \'123\', \'法拉利\': \'123\', \'自行车\': \'123\', \'轮子\': \'123\', \'汽车\': \'123\', \'火箭\': \'123\','
+					),
+					_react2.default.createElement(
 						'form',
 						{ className: 'commentForm', onSubmit: this.logIn.bind(this) },
 						_react2.default.createElement('input', { type: 'text', placeholder: '账号', ref: 'userName' }),
@@ -145,7 +155,7 @@
 		return LogIn;
 	}(_react2.default.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(LogIn, null), document.body);
+	_reactDom2.default.render(_react2.default.createElement(LogIn, null), document.getElementById('chat'));
 
 	var Box = function (_React$Component2) {
 		_inherits(Box, _React$Component2);
@@ -173,8 +183,14 @@
 					console.log('人数' + onuser.length);
 					_this3.setState({
 						onlineuser: onuser,
-						onlinenum: onuser.length
+						onlinenum: onuser.length,
+						newlogin: onuser[onuser.length - 1] + "加入了"
 					});
+					var x = document.getElementById('news');
+					x.style.opacity = 1;
+					setTimeout(function () {
+						x.style.opacity = 0;
+					}, 4000);
 				});
 				socket.on('msg', function (msg) {
 					console.log('战舰状态:', msg.message, msg.userName);
@@ -217,7 +233,7 @@
 						'div',
 						{ className: 'msgbox' },
 						_react2.default.createElement(_onlineuserlist2.default, { userList: this.state.onlineuser, userNum: this.state.onlinenum }),
-						_react2.default.createElement(_showmsg2.default, { messageList: this.state.message })
+						_react2.default.createElement(_showmsg2.default, { messageList: this.state.message, newlogin: this.state.newlogin })
 					),
 					_react2.default.createElement(_submsg2.default, { onMessageSubmit: this.handleMessageSubmit.bind(this) })
 				);
@@ -226,49 +242,6 @@
 
 		return Box;
 	}(_react2.default.Component);
-
-	socket.emit('disconnect', theUserName);
-
-	// userList={ this.state.onUser }
-	// class Chat extends React.Component {
-	// 	constructor() {
-	// 		super()
-	// 		this.state = {
-	// 			router:'/log'
-	// 		}
-	// 		socket.on(`logstate`, info => {
-	// 			if (info === 'false') {
-	// 				logStateInfo = false
-	// 				alert('嘀嘀嘀，学生卡，账号余额不足，请充值')
-	// 			} else if (info === 'same') {
-	// 				logStateInfo = false
-	// 				alert('报告长官，此账号已登录')
-	// 			} else {
-	// 				ReactDOM.render(<Box />, document.getElementById('chat'));
-	// 			}
-	// 			console.log(info)
-	// 		})
-	// 	}
-	// 	render() {
-	// 		let Child
-	// 		switch (this.state.route) {
-	// 			case '/room':
-	// 				Child = Box;
-	// 				break;
-	// 			case '/log':
-	// 				Child = LogIn;
-	// 				break;
-	// 			default:
-	// 				Child = LogIn;
-	// 		}
-	// 		return (
-	// 			<div>
-	//       <h1>App</h1>
-	//       <Child/>
-	//     </div>
-	// 		)
-	// 	}
-	// }
 
 /***/ },
 /* 1 */
@@ -27701,9 +27674,10 @@
 					'div',
 					{ className: 'showmsg' },
 					_react2.default.createElement(
-						'span',
-						null,
-						'消息列表'
+						'h3',
+						{ id: 'news' },
+						'最新消息: ',
+						this.props.newlogin
 					),
 					this.props.messageList.map(function (msg) {
 						return _react2.default.createElement(MessageList, { key: msg.token, data: msg });

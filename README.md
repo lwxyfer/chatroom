@@ -1,44 +1,60 @@
-# 技术桟
+# BX-chatroom
 
-react   redux   webpakc  bable  websocket
+https://github.com/coderhaoxin/welcome-to-bx/issues/1  要求
 
+# 简介
 
-能用就行
+整个项目分为：server端 和 client端 
 
+## server
 
-https://github.com/coderhaoxin/welcome-to-bx/issues/1
+后端使用Node.js
+WebSocket实现实时通讯。使用开源工具 [socket.io](http://socket.io/)
+未使用数据库，直接储存在内存中。
 
-# 功能
+## client
 
-完成一个简易的chatroom
+前端：
 
-UI上没有任何要求, 有功能即可
+react
+react-dom
+babel
+webpack
+socket.io-client
 
-功能点
-
-登录 (server session)
-注册可以不用, 直接数据库初始化user也可以
-发消息(直接发到聊天室, 聊天室内消息公开, 不需要群组等稍复杂的逻辑)
-查看消息
-统计显示在线人数
-
-要求
-
-server 端实现语言, 框架, 数据库不限
-  如果对后端不熟悉, 可以接受使用一些开源实现
-  或简化后端逻辑(如: 不显示在线人数, 数据直接保存在内存等)
-前端使用 react, redux
-需要使用 webpack, babel 构建
-如果能加点test极好, 没有也OK
-收发消息 使用 websocket, 需要考虑基本的容错, 如: ws 断开 等
-完成时间 1~3 day (如果个人时间比较零碎, 可以稍稍放宽)
-提交方式
-
-请在自己的 github 帐号下 新建 一个 repo 完成, 不要 fork 本 repo
-完成后 邮件 告知
+# 结构以及简介
 
 
+```
+- chatroom
+    - build
+        - build.js           // webpack打包output
+    - src
+        - components         // react组件
+            onlineuserlist.jsx
+            showmsg.jsx
+            submsg.jsx
+        - css                // 样式文件，没有用webpack打包
+            - style.css
+        - index.jsx          // webpack 入口文件
+    - .babelrc               // babel 配置
+    - index.html             // 应用主页
+    - package.json           // npm 包管理
+    - server.js              // 后端文件，直接 node server.js 即可启动服务，未做其他额外设置
+    - webpack.config.js      // webpack配置文件
+```
 
-# 不得不说，写项目好爽
+# TODO
 
-实现功能，真的太棒了。
+还有很多要去做的：
+
+- 使用redux
+- 提供普通的账号和邮箱注册功能
+- 使用数据库存储数据
+- 添加私聊的功能
+- 简化代码，提高性能
+
+
+# 最后
+
+上面的几个技术要求，我都算是第一次接触，几天不多的时间去写，还有很多问题。有问题的地方，还希望您能够指出。写了一个简单的问题记录。https://www.zybuluo.com/lwxyfer/note/298643

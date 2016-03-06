@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 export default class SubMsg extends React.Component { 
-	// constructor(props) {
-	//    super(props);
-	//    this.refs.message.value= data
-	//  	}
 	handleSubmit(e) {
 		e.preventDefault();
 		let message = this.refs.message.value.trim();

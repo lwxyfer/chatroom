@@ -19,7 +19,7 @@ socket.on(`logstate`, info => {
 		alert('报告长官，此账号已登录')
 	} else {
 		console.log('登陆L号飞船，起飞')
-		ReactDOM.render(<Box />, document.body);
+		ReactDOM.render(<Box />, document.getElementById('chat'));
 	}
 })
 
@@ -39,6 +39,17 @@ class LogIn extends React.Component {
 		return (
 			<div>
 			<h1>你好</h1>
+			<p> 自定义账号:</p>
+			<p> '习近平': '123',
+    '奥巴马': '123',
+    '致远星': '123',
+    '战列舰': '123',
+    '卡特': '123',
+    '法拉利': '123',
+    '自行车': '123',
+    '轮子': '123',
+    '汽车': '123',
+    '火箭': '123',</p>
 			<form className="commentForm" onSubmit={this.logIn.bind(this)} >
         		<input type="text" placeholder="账号" ref="userName" />
         		<input type="text" placeholder="密码" ref="userPassword" />
@@ -48,17 +59,16 @@ class LogIn extends React.Component {
 		);
 	}
 }
-ReactDOM.render(<LogIn />, document.body);
-
+ReactDOM.render(<LogIn />, document.getElementById('chat'));
 
 class Box extends React.Component { 
 	constructor() {
-			super()
-			this.state = {
-				onlineuser: [],
-				message:[],
-			}
+		super()
+		this.state = {
+			onlineuser: [],
+			message: [],
 		}
+	}
 	getUser() {
 		let msgList = [];
 		socket.on('loginUser', onuser => {
@@ -67,14 +77,20 @@ class Box extends React.Component { 
 			this.setState({
 				onlineuser: onuser,
 				onlinenum: onuser.length,
+				newlogin: onuser[onuser.length - 1] + "加入了",
 			})
+			let x = document.getElementById('news');
+			x.style.opacity = 1;
+			setTimeout(() => {
+				x.style.opacity = 0
+			}, 4000)
 		})
 		socket.on(`msg`, msg => {
-			console.log('战舰状态:',msg.message,msg.userName);
+			console.log('战舰状态:', msg.message, msg.userName);
 			msg.token = new Date().getTime();
 			msgList.push(msg);
 			this.setState({
-				'message':msgList
+				'message': msgList
 			})
 		})
 	}
@@ -88,57 +104,13 @@ class Box extends React.Component { 
 		})
 	}
 	render() {  
-		return ( <div className="chatroom">
+		return (<div className="chatroom">
 				<div className="header"><h2>CHAT Space V:0.1.0</h2></div>
 				<div className="msgbox">
 					<OnlineUserList userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
-					<ShowMsg messageList={ this.state.message }/>
+					<ShowMsg messageList={ this.state.message } newlogin={ this.state.newlogin} />
 				</div>
 				<SubMsg onMessageSubmit={ this.handleMessageSubmit.bind(this) } />
-				</div>
-				)
+				</div>)
 	}
 }
-
-socket.emit('disconnect', theUserName)
-
-// userList={ this.state.onUser }
-// class Chat extends React.Component {
-// 	constructor() {
-// 		super()
-// 		this.state = {
-// 			router:'/log'
-// 		}
-// 		socket.on(`logstate`, info => {
-// 			if (info === 'false') {
-// 				logStateInfo = false
-// 				alert('嘀嘀嘀，学生卡，账号余额不足，请充值')
-// 			} else if (info === 'same') {
-// 				logStateInfo = false
-// 				alert('报告长官，此账号已登录')
-// 			} else {
-// 				ReactDOM.render(<Box />, document.getElementById('chat'));
-// 			}
-// 			console.log(info)
-// 		})
-// 	}
-// 	render() {
-// 		let Child
-// 		switch (this.state.route) {
-// 			case '/room':
-// 				Child = Box;
-// 				break;
-// 			case '/log':
-// 				Child = LogIn;
-// 				break;
-// 			default:
-// 				Child = LogIn;
-// 		}
-// 		return (
-// 			<div>
-//       <h1>App</h1>
-//       <Child/>
-//     </div>
-// 		)
-// 	}
-// }
