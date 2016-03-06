@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './hello.jsx';
 import OnlineUserList from './components/onlineuserlist.jsx';
 import SubMsg from './components/submsg.jsx';
 import ShowMsg from './components/showmsg.jsx';
@@ -19,9 +18,9 @@ socket.on(`logstate`, info => {
 		logStateInfo = false
 		alert('报告长官，此账号已登录')
 	} else {
-		ReactDOM.render(<Box />, document.getElementById('chat'));
+		console.log('登陆L号飞船，起飞')
+		ReactDOM.render(<Box />, document.body);
 	}
-	console.log('logstate: ' + info)
 })
 
 class LogIn extends React.Component {
@@ -39,7 +38,7 @@ class LogIn extends React.Component {
 	render() {
 		return (
 			<div>
-			<h1>遇见你真好</h1>
+			<h1>你好</h1>
 			<form className="commentForm" onSubmit={this.logIn.bind(this)} >
         		<input type="text" placeholder="账号" ref="userName" />
         		<input type="text" placeholder="密码" ref="userPassword" />
@@ -49,26 +48,19 @@ class LogIn extends React.Component {
 		);
 	}
 }
-ReactDOM.render(<LogIn />, document.getElementById('chat'));
+ReactDOM.render(<LogIn />, document.body);
 
 
 class Box extends React.Component { 
 	constructor() {
 			super()
 			this.state = {
-				onlineuser: []
+				onlineuser: [],
+				message:[],
 			}
 		}
-		// static update(onuser) {
-		// 		// let self = this;
-		// 		this.setState({
-		// 			onlineuser: onuser
-		// 		})
-		// 	}
-		// componentDidMount() {
-		// 	setInterval(this.update.bind(this), 100);
-		// }
 	getUser() {
+		let msgList = [];
 		socket.on('loginUser', onuser => {
 			console.log('在线用户: ' + onuser);
 			console.log('人数' + onuser.length);
@@ -78,10 +70,11 @@ class Box extends React.Component { 
 			})
 		})
 		socket.on(`msg`, msg => {
-			console.log('online user info',msg.message,msg.userName);
+			console.log('战舰状态:',msg.message,msg.userName);
+			msg.token = new Date().getTime();
+			msgList.push(msg);
 			this.setState({
-				msg:msg.message,
-				name:msg.userName,
+				'message':msgList
 			})
 		})
 	}
@@ -95,12 +88,15 @@ class Box extends React.Component { 
 		})
 	}
 	render() {  
-		return <div>
-				<Hello />
-				<OnlineUserList  name="lw" userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
-				<ShowMsg />
+		return ( <div className="chatroom">
+				<div className="header"><h2>CHAT Space V:0.1.0</h2></div>
+				<div className="msgbox">
+					<OnlineUserList userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
+					<ShowMsg messageList={ this.state.message }/>
+				</div>
 				<SubMsg onMessageSubmit={ this.handleMessageSubmit.bind(this) } />
-				</div> 
+				</div>
+				)
 	}
 }
 

@@ -5,23 +5,22 @@ export default class OnlineUserList extends React.Component {
 	render() {
 
 		return (
-			<div>
+			<div className="userlist">
 			<span>在线人数：{ this.props.userNum }</span>
-				<div className="userList">
-				<span>在线用户列表：</span>
+				<div className="userlists">
+				<span>在线用户：</span>
 					<ul>
         {this.props.userList.map((result) => {
-           return <MessageList key={result} data={result}/>;
+           return <OnlineList key={result} data={result}/>;
         })}
       				</ul>
 				</div>
-				<div>{ this.props.name }</div>
 			</div>
 		)
 	}
 }
 
-class MessageList extends React.Component {
+class OnlineList extends React.Component {
 	render() {
 		return (
 			<li>{ this.props.data }</li>

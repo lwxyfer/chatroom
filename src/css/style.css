@@ -1,0 +1,151 @@
+/* Forms
+   ========================================================================== */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  box-sizing: content-box; /* 2 */
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+textarea {
+  overflow: auto;
+}
+optgroup {
+  font-weight: bold;
+}
+
+
+html {
+	width:100%;
+	height:100%;
+	font-family:'MicroSoft YaHei';
+	font-size:100%;
+}
+body {
+	width:100%;
+	height:100%;
+	margin:0px;
+	padding:0px;
+	background:#EEEEEE;
+}
+
+.chatroom {
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0px;
+}
+.header {
+	width:100%;
+	height:10%;
+	background:#fff;
+	margin:0;
+}
+.msgbox {
+	width:100%;
+	height:68%;
+	border-
+}
+.msgbox > .userlist {
+	width:20%;
+	height:100%;
+	float:left;
+	border-right: 1rem solid #fff;
+	box-sizing:border-box;
+}
+.msgbox > .showmsg {
+	width:80%;
+	height:100%;
+	float:right;
+	padding:1rem;
+	border: 0.5rem solid #36DEA5;
+	box-sizing: border-box;
+	overflow:auto;
+}
+.showmsg .usermsg {
+	min-height:1.5rem;
+	width:auto;
+	line-height: 1.5rem;
+	background:#fff;
+	padding:0.5rem;
+	margin:0.5rem;
+	border-radius:0.3rem;
+}
+.submsg {
+	width:100%;
+	height:20%;
+	margin-top:1rem;
+}
+.submsg > textarea{
+	width:80%;
+	height:90%;
+	margin-left:1%;
+}
+.submsg > input {
+	width: 17%;
+    height: 90%;
+    display: block;
+    float: right;
+    margin-right: 1%;
+}
+h1,h2,h3,h4 {
+	margin:0px
+}
