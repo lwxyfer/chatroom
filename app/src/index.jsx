@@ -5,7 +5,7 @@ import OnlineUserList from './components/onlineuserlist.jsx';
 import SubMsg from './components/submsg.jsx';
 import ShowMsg from './components/showmsg.jsx';
 
-let socket = io.connect('ws://localhost:8000');
+let socket = io.connect('http://localhost:3000');
 let logStateInfo = true;
 let theUserName = null;
 let onlineUser = null;
@@ -83,7 +83,7 @@ class Box extends React.Component { 
 			x.style.opacity = 1;
 			setTimeout(() => {
 				x.style.opacity = 0
-			}, 4000)
+			}, 5000)
 		})
 		socket.on(`msg`, msg => {
 			console.log('战舰状态:', msg.message, msg.userName);

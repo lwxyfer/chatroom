@@ -80,7 +80,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var socket = _socket2.default.connect('ws://localhost:8000');
+	// let socket = io.connect('ws://fhobsc-8080-tzoamm.box.myide.io/:8080');
+	var socket = _socket2.default.connect('http://localhost:3000');
 	var logStateInfo = true;
 	var theUserName = null;
 	var onlineUser = null;
@@ -190,7 +191,7 @@
 					x.style.opacity = 1;
 					setTimeout(function () {
 						x.style.opacity = 0;
-					}, 4000);
+					}, 5000);
 				});
 				socket.on('msg', function (msg) {
 					console.log('战舰状态:', msg.message, msg.userName);
@@ -27597,11 +27598,6 @@
 
 		_createClass(SubMsg, [{
 			key: 'handleSubmit',
-
-			// constructor(props) {
-			//    super(props);
-			//    this.refs.message.value= data
-			//  	}
 			value: function handleSubmit(e) {
 				e.preventDefault();
 				var message = this.refs.message.value.trim();
