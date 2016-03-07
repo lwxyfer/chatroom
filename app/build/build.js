@@ -80,7 +80,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// let socket = io.connect('ws://fhobsc-8080-tzoamm.box.myide.io/:8080');
 	var socket = _socket2.default.connect('http://localhost:3000');
 	var logStateInfo = true;
 	var theUserName = null;
@@ -187,10 +186,10 @@
 						onlinenum: onuser.length,
 						newlogin: onuser[onuser.length - 1] + "加入了"
 					});
-					var x = document.getElementById('news');
-					x.style.opacity = 1;
+					var x = document.getElementById('login');
+					x.style.display = 'block';
 					setTimeout(function () {
-						x.style.opacity = 0;
+						x.style.display = 'none';
 					}, 5000);
 				});
 				socket.on('msg', function (msg) {
@@ -200,6 +199,17 @@
 					_this3.setState({
 						'message': msgList
 					});
+				});
+				socket.on('quit', function (quitinfo) {
+					console.log('用户退出:' + quitinfo);
+					_this3.setState({
+						quituser: quitinfo + "退出了"
+					});
+					var y = document.getElementById('quit');
+					y.style.display = 'block';
+					setTimeout(function () {
+						y.style.display = 'none';
+					}, 5000);
 				});
 			}
 		}, {
@@ -234,7 +244,7 @@
 						'div',
 						{ className: 'msgbox' },
 						_react2.default.createElement(_onlineuserlist2.default, { userList: this.state.onlineuser, userNum: this.state.onlinenum }),
-						_react2.default.createElement(_showmsg2.default, { messageList: this.state.message, newlogin: this.state.newlogin })
+						_react2.default.createElement(_showmsg2.default, { messageList: this.state.message, newlogin: this.state.newlogin, quitUser: this.state.quituser })
 					),
 					_react2.default.createElement(_submsg2.default, { onMessageSubmit: this.handleMessageSubmit.bind(this) })
 				);
@@ -27671,9 +27681,17 @@
 					{ className: 'showmsg' },
 					_react2.default.createElement(
 						'h3',
-						{ id: 'news' },
-						'最新消息: ',
-						this.props.newlogin
+						{ id: 'login' },
+						' ',
+						this.props.newlogin,
+						' '
+					),
+					_react2.default.createElement(
+						'h3',
+						{ id: 'quit' },
+						' ',
+						this.props.quitUser,
+						' '
 					),
 					this.props.messageList.map(function (msg) {
 						return _react2.default.createElement(MessageList, { key: msg.token, data: msg });

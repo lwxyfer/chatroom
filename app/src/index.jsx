@@ -79,10 +79,10 @@ class Box extends React.Component { 
 				onlinenum: onuser.length,
 				newlogin: onuser[onuser.length - 1] + "加入了",
 			})
-			let x = document.getElementById('news');
-			x.style.opacity = 1;
+			let x = document.getElementById('login');
+			x.style.display = 'block';
 			setTimeout(() => {
-				x.style.opacity = 0
+				x.style.display = 'none';
 			}, 5000)
 		})
 		socket.on(`msg`, msg => {
@@ -92,6 +92,17 @@ class Box extends React.Component { 
 			this.setState({
 				'message': msgList
 			})
+		})
+		socket.on('quit', quitinfo => {
+			console.log('用户退出:' + quitinfo);
+			this.setState({
+				quituser:quitinfo + "退出了",
+			})
+			let y = document.getElementById('quit');
+			y.style.display = 'block';
+			setTimeout(() => {
+				y.style.display = 'none';
+			}, 5000)
 		})
 	}
 	componentDidMount() {
@@ -108,7 +119,7 @@ class Box extends React.Component { 
 				<div className="header"><h2>CHAT Space V:0.1.0</h2></div>
 				<div className="msgbox">
 					<OnlineUserList userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
-					<ShowMsg messageList={ this.state.message } newlogin={ this.state.newlogin} />
+					<ShowMsg messageList={ this.state.message } newlogin={ this.state.newlogin } quitUser={ this.state.quituser }/>
 				</div>
 				<SubMsg onMessageSubmit={ this.handleMessageSubmit.bind(this) } />
 				</div>)

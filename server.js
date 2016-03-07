@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
         socket.emit('logstate', 'true')
         console.log('在线' + onlineUsers)
         io.emit('loginUser', onlineUsers)
-
+        socket.name = user.userName
       } else {
         socket.emit('logstate', 'same')
       }
@@ -41,17 +41,19 @@ io.on('connection', function(socket) {
       socket.emit('logstate', 'false')
     }
   });
-  socket.on('test', function(data) {
-    console.log(data);
-  });
   socket.on('msg', function(msg) {
     io.emit('msg', msg);
     console.log(msg.userName + ':' + msg.message)
   })
-  socket.on('disconnect', function(msg) {
-    console.log(msg)
-    socket.name
-  })
+
+  socket.on('disconnect', function() {
+    console.log('用户退出:' + socket.name)
+    var i = onlineUsers.indexOf(socket.name)
+    onlineUsers.splice(i, 1);
+    socket.broadcast.emit('quit', socket.name);
+    io.emit('loginUser', onlineUsers)
+  });
+
 });
 
 http.listen(3000, function() {
