@@ -8,20 +8,22 @@ https://github.com/coderhaoxin/welcome-to-bx/issues/1  要求
 
 ## server
 
-后端使用Node.js
-使用express建立HTTP服务，通过express.static内置中间件函数来访问页面。
-WebSocket实现实时通讯。使用开源工具 [socket.io](http://socket.io/)
-未使用数据库，直接储存在内存中。
+后端
+
+- 使用Node.js
+- 使用express建立HTTP服务，通过express.static内置中间件函数来访问页面。
+- WebSocket实现实时通讯。使用开源工具 [socket.io](http://socket.io/)
+- 未使用数据库，直接储存在内存中。
 
 ## client
 
 前端：
 
-react
-react-dom
-babel
-webpack
-socket.io-client
+- react
+- react-dom
+- babel
+- webpack
+- socket.io-client
 
 # 结构以及简介
 
