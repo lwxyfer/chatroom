@@ -55,6 +55,18 @@ node server.js
 open http://localhost:3000 to visit
 ```
 
+build:
+
+```
+//client:在app文件夹里运行webpack打包，没有定义npm命令
+cd app
+webpack --progress --colors  
+
+// server
+server.js
+```
+
+
 # TODO
 
 还有很多要去做的：
