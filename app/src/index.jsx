@@ -5,9 +5,9 @@ import OnlineUserList from './components/onlineuserlist.jsx';
 import SubMsg from './components/submsg.jsx';
 import ShowMsg from './components/showmsg.jsx';
 
-let socket = io.connect('http://localhost:3000');
-let logStateInfo = true;
-let theUserName = null;
+let socket = io.connect('http://localhost:3000'); 
+let logStateInfo = true; 
+let theUserName = null; 
 let onlineUser = null;
 
 socket.on(`logstate`, info => {

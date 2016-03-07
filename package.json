@@ -17,10 +17,13 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
+    "css-loader": "^0.23.1",
+    "express": "^4.13.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "redux": "^3.3.1",
     "socket.io": "^1.4.5",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "style-loader": "^0.13.0"
   }
 }

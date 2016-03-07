@@ -1,10 +1,9 @@
-var app = require('http').createServer()
-var io = require('socket.io')(app);
+var express = require('express');
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
-app.listen(8000, function() {
-  console.log("listening on 8000");
-  console.log("create success")
-});
+app.use(express.static('app'));
 
 // 注册用户直接保存
 var legalUsers = {
@@ -53,4 +52,8 @@ io.on('connection', function(socket) {
     console.log(msg)
     socket.name
   })
+});
+
+http.listen(3000, function() {
+  console.log('listening on *:3000');
 });
