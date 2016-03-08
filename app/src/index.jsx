@@ -5,9 +5,9 @@ import OnlineUserList from './components/onlineuserlist.jsx';
 import SubMsg from './components/submsg.jsx';
 import ShowMsg from './components/showmsg.jsx';
 
-let socket = io.connect('http://localhost:3000'); 
-let logStateInfo = true; 
-let theUserName = null; 
+let socket = io.connect('http://localhost:3000');
+let logStateInfo = true;
+let theUserName = null;
 let onlineUser = null;
 
 socket.on(`logstate`, info => {
@@ -39,7 +39,7 @@ class LogIn extends React.Component {
 		return (
 			<div>
 			<h1>你好</h1>
-			<p> 自定义账号:</p>
+			<p> 测试账号和密码:</p>
 			<p> '习近平': '123',
     '奥巴马': '123',
     '致远星': '123',
@@ -71,7 +71,7 @@ class Box extends React.Component { 
 	}
 	getUser() {
 		let msgList = [];
-		socket.on('loginUser', onuser => {
+		socket.on('loginUser', (onuser, info) => {
 			console.log('在线用户: ' + onuser);
 			console.log('人数' + onuser.length);
 			this.setState({
@@ -79,11 +79,13 @@ class Box extends React.Component { 
 				onlinenum: onuser.length,
 				newlogin: onuser[onuser.length - 1] + "加入了",
 			})
-			let x = document.getElementById('login');
-			x.style.display = 'block';
-			setTimeout(() => {
-				x.style.display = 'none';
-			}, 5000)
+			if (!info) {
+				let x = document.getElementById('login');
+				x.style.display = 'block';
+				setTimeout(() => {
+					x.style.display = 'none';
+				}, 5000)
+			}
 		})
 		socket.on(`msg`, msg => {
 			console.log('战舰状态:', msg.message, msg.userName);
@@ -96,7 +98,7 @@ class Box extends React.Component { 
 		socket.on('quit', quitinfo => {
 			console.log('用户退出:' + quitinfo);
 			this.setState({
-				quituser:quitinfo + "退出了",
+				quituser: quitinfo + "退出了",
 			})
 			let y = document.getElementById('quit');
 			y.style.display = 'block';

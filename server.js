@@ -20,7 +20,6 @@ var legalUsers = {
   }
   // 在线用户信息
 var onlineUsers = [];
-var onlineNum = 0;
 
 io.on('connection', function(socket) {
   console.log('connected ===== successssss');
@@ -29,9 +28,8 @@ io.on('connection', function(socket) {
     if (legalUsers.hasOwnProperty(user.userName) && legalUsers[user.userName] == user.userPassword) {
       if (onlineUsers.indexOf(user.userName) === -1) {
         onlineUsers.push(user.userName);
-        onlineNum++;
         socket.emit('logstate', 'true')
-        console.log('在线' + onlineUsers)
+        console.log('在线用户：' + onlineUsers)
         io.emit('loginUser', onlineUsers)
         socket.name = user.userName
       } else {
@@ -45,13 +43,14 @@ io.on('connection', function(socket) {
     io.emit('msg', msg);
     console.log(msg.userName + ':' + msg.message)
   })
-
   socket.on('disconnect', function() {
-    console.log('用户退出:' + socket.name)
-    var i = onlineUsers.indexOf(socket.name)
-    onlineUsers.splice(i, 1);
-    socket.broadcast.emit('quit', socket.name);
-    io.emit('loginUser', onlineUsers)
+    if (onlineUsers.indexOf(socket.name) + 1) {
+      console.log('用户退出:' + socket.name)
+      var i = onlineUsers.indexOf(socket.name)
+      onlineUsers.splice(i, 1);
+      socket.broadcast.emit('quit', socket.name);
+      io.emit('loginUser', onlineUsers, 'quitinfo')
+    }
   });
 
 });

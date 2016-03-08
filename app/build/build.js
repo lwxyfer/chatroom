@@ -134,7 +134,7 @@
 					_react2.default.createElement(
 						'p',
 						null,
-						' 自定义账号:'
+						' 测试账号和密码:'
 					),
 					_react2.default.createElement(
 						'p',
@@ -178,7 +178,7 @@
 				var _this3 = this;
 
 				var msgList = [];
-				socket.on('loginUser', function (onuser) {
+				socket.on('loginUser', function (onuser, info) {
 					console.log('在线用户: ' + onuser);
 					console.log('人数' + onuser.length);
 					_this3.setState({
@@ -186,11 +186,15 @@
 						onlinenum: onuser.length,
 						newlogin: onuser[onuser.length - 1] + "加入了"
 					});
-					var x = document.getElementById('login');
-					x.style.display = 'block';
-					setTimeout(function () {
-						x.style.display = 'none';
-					}, 5000);
+					if (!info) {
+						(function () {
+							var x = document.getElementById('login');
+							x.style.display = 'block';
+							setTimeout(function () {
+								x.style.display = 'none';
+							}, 5000);
+						})();
+					}
 				});
 				socket.on('msg', function (msg) {
 					console.log('战舰状态:', msg.message, msg.userName);
