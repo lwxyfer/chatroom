@@ -37,23 +37,23 @@ class LogIn extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<div id="loginbox">
 			<h1>你好</h1>
 			<p> 测试账号和密码:</p>
 			<p> '习近平': '123',
     '奥巴马': '123',
     '致远星': '123',
     '战列舰': '123',
-    '卡特': '123',
+    '卡特': '123',7
     '法拉利': '123',
     '自行车': '123',
     '轮子': '123',
     '汽车': '123',
     '火箭': '123',</p>
-			<form className="commentForm" onSubmit={this.logIn.bind(this)} >
-        		<input type="text" placeholder="账号" ref="userName" />
-        		<input type="text" placeholder="密码" ref="userPassword" />
-        		<input value="发射" type="submit" />
+			<form onSubmit={this.logIn.bind(this)} >
+        		<input type="text" placeholder="ID" ref="userName" />
+        		<input type="text" placeholder="输入：123" ref="userPassword" />
+        		<input value="嗨起来" type="submit" />
       		</form>
       		</div>
 		);
@@ -92,8 +92,16 @@ class Box extends React.Component { 
 			msg.token = new Date().getTime();
 			msgList.push(msg);
 			this.setState({
-				'message': msgList
+				'message': msgList,
 			})
+			let allS = document.querySelectorAll('#showmsg span')
+			console.log(allS)
+			console.log(allS[0].innerHTML)
+			for(let i=0; i< allS.length;i++ ) {
+				if(allS[i].innerHTML === theUserName ) {
+					allS[i].nextSibling.className="thisuser"
+				}
+			}
 		})
 		socket.on('quit', quitinfo => {
 			console.log('用户退出:' + quitinfo);
@@ -117,9 +125,8 @@ class Box extends React.Component { 
 		})
 	}
 	render() {  
-		return (<div className="chatroom">
-				<div className="header"><h2>CHAT Space V:0.1.0</h2></div>
-				<div className="msgbox">
+		return (<div id="chatroom">
+				<div id="msgbox">
 					<OnlineUserList userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
 					<ShowMsg messageList={ this.state.message } newlogin={ this.state.newlogin } quitUser={ this.state.quituser }/>
 				</div>

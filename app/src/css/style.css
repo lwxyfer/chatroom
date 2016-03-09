@@ -1,25 +1,3 @@
-/**
- * simple reset css
- */
-h1,h2,h3,h4 {
-	margin:0px
-}
-button,
-input,
-optgroup,
-select,
-textarea {
-  color: inherit; /* 1 */
-  font: inherit; /* 2 */
-  margin: 0; /* 3 */
-}
-button {
-  overflow: visible;
-}
-button,
-select {
-  text-transform: none;
-}
 
 button,
 html input[type="button"], /* 1 */
@@ -31,14 +9,6 @@ input[type="submit"] {
 button[disabled],
 html input[disabled] {
   cursor: default;
-}
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-input {
-  line-height: normal;
 }
 textarea {
   overflow: auto;
@@ -60,68 +30,103 @@ body {
 	padding:0px;
 	background:#EEEEEE;
 }
+body::before {
+	content:'';
+	width:100%;
+	height:100%;
+	position:absolute;
+	background: url('../img/a4.jpg');
+	z-index:-1;
+	-webkit-filter: blur(8px);
+	-o-filter: blur(8px);
+	filter: blur(8px);
+}
+h1,h2,h3,h4 {
+	margin:0px
+}
 #chat {
 	width:100%;
 	height:100%;
 	padding:0;
 	margin:0;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+	justify-content:center;
 }
-.chatroom {
-	width:100%;
-	height:100%;
-	padding:0px;
-	margin:0px;
-}
-.header {
-	width:100%;
-	height:10%;
-	background:#fff;
-	margin:0;
-}
-.msgbox {
-	width:100%;
-	height:68%;
-	border-
-}
-.msgbox > .userlist {
+#loginbox {
 	width:20%;
-	height:100%;
-	float:left;
-	border-right: 1rem solid #fff;
-	box-sizing:border-box;
+	text-align:center;
+	color:#fff;
 }
-.msgbox > .showmsg {
-	width:80%;
-	height:100%;
-	float:right;
-	padding:1rem;
-	border: 0.5rem solid #36DEA5;
-	box-sizing: border-box;
+#loginbox input {
+	display:block;
+	width:100%;
+	line-height: 1.5rem;
+	margin-bottom:1rem;
+}
+#chatroom {
+	width:90%;
+	height:90%;
+}
+#msgbox {
+	width:100%;
+	height:80%;
+	display:flex;
+	flex-direction:row;
+}
+#msgbox > div:nth-child(1) {
+	width:15%;
+	flex:0 0 auto;
+	color:#fff;
+}
+#msgbox > div:nth-child(1) ul{
+	list-style-type:none;
+	padding:0px;
+}
+#msgbox > div:nth-child(1) ul li {
+	border-left:0.5rem solid #fff;
+	padding-left:0.5rem;
+	margin-bottom:0.5rem;
+}
+#msgbox > div:nth-child(2) {
+	/*border:3px solid #fff;*/
+	width:85%;
+	flex:0 1 auto;
 	overflow:auto;
 }
-.showmsg .usermsg {
-	min-height:1.5rem;
-	width:auto;
-	line-height: 1.5rem;
+#msgbox > div:nth-child(2) div {
+	display:flex;
+	flex-direction:row;
+	align-items:flex-start;
+}
+#msgbox > div:nth-child(2) p {
 	background:#fff;
+	max-width:90%;
+	margin-top:0px;
+	display:inline-block;
 	padding:0.5rem;
-	margin:0.5rem;
 	border-radius:0.3rem;
 }
-.submsg {
-	width:100%;
+#msgbox > div:nth-child(2) span {
+	color:#fff;
+}
+#msgbox > div:nth-child(2) span::after {
+	content:'：';
+}
+#submsg {
 	height:20%;
-	margin-top:1rem;
+	display:flex;
 }
-.submsg > textarea{
+#submsg textarea {
 	width:80%;
-	height:90%;
-	margin-left:1%;
+	height:100%;
 }
-.submsg > input {
-	width: 17%;
-    height: 90%;
-    display: block;
-    float: right;
-    margin-right: 1%;
+#submsg input {
+	width:20%;
+	height:103%;
+}
+.thisuser {
+	background:#5EC1F7 !important;
+	color:#fff;
 }

@@ -125,7 +125,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ id: 'loginbox' },
 					_react2.default.createElement(
 						'h1',
 						null,
@@ -139,14 +139,14 @@
 					_react2.default.createElement(
 						'p',
 						null,
-						' \'习近平\': \'123\', \'奥巴马\': \'123\', \'致远星\': \'123\', \'战列舰\': \'123\', \'卡特\': \'123\', \'法拉利\': \'123\', \'自行车\': \'123\', \'轮子\': \'123\', \'汽车\': \'123\', \'火箭\': \'123\','
+						' \'习近平\': \'123\', \'奥巴马\': \'123\', \'致远星\': \'123\', \'战列舰\': \'123\', \'卡特\': \'123\',7 \'法拉利\': \'123\', \'自行车\': \'123\', \'轮子\': \'123\', \'汽车\': \'123\', \'火箭\': \'123\','
 					),
 					_react2.default.createElement(
 						'form',
-						{ className: 'commentForm', onSubmit: this.logIn.bind(this) },
-						_react2.default.createElement('input', { type: 'text', placeholder: '账号', ref: 'userName' }),
-						_react2.default.createElement('input', { type: 'text', placeholder: '密码', ref: 'userPassword' }),
-						_react2.default.createElement('input', { value: '发射', type: 'submit' })
+						{ onSubmit: this.logIn.bind(this) },
+						_react2.default.createElement('input', { type: 'text', placeholder: 'ID', ref: 'userName' }),
+						_react2.default.createElement('input', { type: 'text', placeholder: '输入：123', ref: 'userPassword' }),
+						_react2.default.createElement('input', { value: '嗨起来', type: 'submit' })
 					)
 				);
 			}
@@ -203,6 +203,14 @@
 					_this3.setState({
 						'message': msgList
 					});
+					var allS = document.querySelectorAll('#showmsg span');
+					console.log(allS);
+					console.log(allS[0].innerHTML);
+					for (var i = 0; i < allS.length; i++) {
+						if (allS[i].innerHTML === theUserName) {
+							allS[i].nextSibling.className = "thisuser";
+						}
+					}
 				});
 				socket.on('quit', function (quitinfo) {
 					console.log('用户退出:' + quitinfo);
@@ -234,19 +242,10 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'chatroom' },
+					{ id: 'chatroom' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'header' },
-						_react2.default.createElement(
-							'h2',
-							null,
-							'CHAT Space V:0.1.0'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'msgbox' },
+						{ id: 'msgbox' },
 						_react2.default.createElement(_onlineuserlist2.default, { userList: this.state.onlineuser, userNum: this.state.onlinenum }),
 						_react2.default.createElement(_showmsg2.default, { messageList: this.state.message, newlogin: this.state.newlogin, quitUser: this.state.quituser })
 					),
@@ -27515,7 +27514,7 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'userlist' },
+					{ id: 'userlist' },
 					_react2.default.createElement(
 						'span',
 						null,
@@ -27524,7 +27523,7 @@
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'userlists' },
+						null,
 						_react2.default.createElement(
 							'span',
 							null,
@@ -27569,9 +27568,6 @@
 
 		return OnlineList;
 	}(_react2.default.Component);
-	// var userNodes = this.props.userList.map((onuser) => {
-	// 	return (<li>{onuser}</li>)
-	// });
 
 /***/ },
 /* 210 */
@@ -27614,11 +27610,10 @@
 			key: 'handleSubmit',
 			value: function handleSubmit(e) {
 				e.preventDefault();
-				var message = this.refs.message.value.trim();
+				var message = this.refs.message.value;
 				if (!message) {
 					return;
 				}
-				//传递给上层： emit(message)
 				this.props.onMessageSubmit(message);
 				this.refs.message.value = '';
 				return;
@@ -27628,7 +27623,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'form',
-					{ className: 'submsg', onSubmit: this.handleSubmit.bind(this) },
+					{ id: 'submsg', onSubmit: this.handleSubmit.bind(this) },
 					_react2.default.createElement('textarea', { ref: 'message' }),
 					_react2.default.createElement('input', { value: '发射', type: 'submit' })
 				);
@@ -27682,20 +27677,16 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'showmsg' },
+					{ id: 'showmsg' },
 					_react2.default.createElement(
 						'h3',
 						{ id: 'login' },
-						' ',
-						this.props.newlogin,
-						' '
+						this.props.newlogin
 					),
 					_react2.default.createElement(
 						'h3',
 						{ id: 'quit' },
-						' ',
-						this.props.quitUser,
-						' '
+						this.props.quitUser
 					),
 					this.props.messageList.map(function (msg) {
 						return _react2.default.createElement(MessageList, { key: msg.token, data: msg });
@@ -27727,12 +27718,11 @@
 					_react2.default.createElement(
 						'span',
 						null,
-						this.props.data.userName,
-						' ： '
+						this.props.data.userName
 					),
 					_react2.default.createElement(
 						'p',
-						{ className: 'usermsg' },
+						{ className: this.props.pClass },
 						this.props.data.message
 					)
 				);

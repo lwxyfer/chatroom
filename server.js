@@ -52,7 +52,6 @@ io.on('connection', function(socket) {
       io.emit('loginUser', onlineUsers, 'quitinfo')
     }
   });
-
 });
 
 http.listen(3000, function() {

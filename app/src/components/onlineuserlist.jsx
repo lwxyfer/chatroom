@@ -5,9 +5,9 @@ export default class OnlineUserList extends React.Component {
 	render() {
 
 		return (
-			<div className="userlist">
-			<span>在线人数：{ this.props.userNum }</span>
-				<div className="userlists">
+			<div id="userlist">
+				<span>在线人数：{ this.props.userNum }</span>
+				<div>
 				<span>在线用户：</span>
 					<ul>
         {this.props.userList.map((result) => {
@@ -27,6 +27,3 @@ class OnlineList extends React.Component {
 		)
 	}
 }
-		// var userNodes = this.props.userList.map((onuser) => {
-		// 	return (<li>{onuser}</li>)
-		// });
