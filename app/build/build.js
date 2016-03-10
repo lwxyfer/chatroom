@@ -27680,12 +27680,12 @@
 					{ id: 'showmsg' },
 					_react2.default.createElement(
 						'h3',
-						{ id: 'login' },
+						{ id: 'login', className: 'tooltip' },
 						this.props.newlogin
 					),
 					_react2.default.createElement(
 						'h3',
-						{ id: 'quit' },
+						{ id: 'quit', className: 'tooltip' },
 						this.props.quitUser
 					),
 					this.props.messageList.map(function (msg) {

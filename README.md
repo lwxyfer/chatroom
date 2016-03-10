@@ -1,6 +1,7 @@
-# BX-chatroom
+# chatroom
 
-https://github.com/coderhaoxin/welcome-to-bx/issues/1  要求
+DEMO：http://ccchat.coding.io/
+简单的实时聊天室
 
 # 简介
 
@@ -98,12 +99,6 @@ hash 值改变
 
 最终成为一款比较成熟的产品
 
-# 最后
-
-上面的几个技术要求，我都算是第一次接触，几天不多的时间去写，还有很多问题。有问题的地方，还希望您能够指出。写了一个简单的问题记录。https://www.zybuluo.com/lwxyfer/note/298643
-
-
-现在两个事件 混合了，处理起来有点问题。
 
 # changelog
 
@@ -111,3 +106,5 @@ hash 值改变
     - simplfy html structure
     - use flex
     - highlight text
+
+only test chrome（chrome大法好）

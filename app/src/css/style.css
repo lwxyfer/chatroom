@@ -28,18 +28,7 @@ body {
 	height:100%;
 	margin:0px;
 	padding:0px;
-	background:#EEEEEE;
-}
-body::before {
-	content:'';
-	width:100%;
-	height:100%;
-	position:absolute;
-	background: url('../img/a4.jpg');
-	z-index:-1;
-	-webkit-filter: blur(8px);
-	-o-filter: blur(8px);
-	filter: blur(8px);
+	background: -webkit-linear-gradient(20deg, #accd3a, #2bc792);
 }
 h1,h2,h3,h4 {
 	margin:0px
@@ -129,4 +118,11 @@ h1,h2,h3,h4 {
 .thisuser {
 	background:#5EC1F7 !important;
 	color:#fff;
+}
+.tooltip {
+    position:fixed;
+    top:1rem;
+    left:50%;
+    transform:translateX(-50%);
+    transition:top 1s;
 }
