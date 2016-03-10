@@ -1,7 +1,8 @@
 # chatroom
 
 DEMO：http://ccchat.coding.io/
-简单的实时聊天室
+
+为学习react和ES2015而建立的项目
 
 # 简介
 
@@ -80,24 +81,9 @@ node server.js
 - 使用redux
 - 提供普通的账号和邮箱注册功能
 - 使用数据库存储数据
-- 添加私聊的功能
+- 添加私聊，群组的功能
+- 对消息提供基本的富文本功能
 - 简化代码，提高性能
-
-# Q
-
-退出  socket.xxx  自定义数据
-消息滚动
-最新加入 position:fixed
-增加MD，emoji，img 
-自定义路由
-hash 值改变
-消息颜色
-代码语法高亮
-使其具有富文本的功能
-
-解决文本转义： 能有空格 和 换行
-
-最终成为一款比较成熟的产品
 
 
 # changelog
