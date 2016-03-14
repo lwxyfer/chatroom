@@ -5,8 +5,8 @@ export default class ShowMsg extends React.Component {
 	render() {
 		return (
 			<div id="showmsg">
-			<h3 id="login" className="tooltip">{this.props.newlogin}</h3>
-			<h3 id="quit" className="tooltip">{this.props.quitUser}</h3>
+			<span id="loginTooltip" className="tooltip">{this.props.newlogin}</span>
+			<span id="quitTooltip" className="tooltipa">{this.props.quitUser}</span>
 				{this.props.messageList.map((msg) => {
            return <MessageList key={msg.token} data={ msg }/>;
         })}

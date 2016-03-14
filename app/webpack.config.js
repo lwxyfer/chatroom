@@ -19,5 +19,12 @@ module.exports = {
                 presets: ['es2015', 'react']
             }
         }]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery",
+            "window.jQuery": "jquery",
+        })
+    ]
 };

@@ -26,8 +26,8 @@ socket.on(`logstate`, info => {
 class LogIn extends React.Component {
 	logIn(e) {
 		e.preventDefault();
-		var userName = this.refs.userName.value.trim();
-		var userPassword = this.refs.userPassword.value.trim();
+		let userName = this.refs.userName.value.trim();
+		let userPassword = this.refs.userPassword.value.trim();
 		theUserName = userName;
 		socket.emit('login', {
 			'userName': userName,
@@ -39,17 +39,6 @@ class LogIn extends React.Component {
 		return (
 			<div id="loginbox">
 			<h1>你好</h1>
-			<p> 测试账号和密码:</p>
-			<p> '习近平': '123',
-    '奥巴马': '123',
-    '致远星': '123',
-    '战列舰': '123',
-    '卡特': '123',7
-    '法拉利': '123',
-    '自行车': '123',
-    '轮子': '123',
-    '汽车': '123',
-    '火箭': '123',</p>
 			<form onSubmit={this.logIn.bind(this)} >
         		<input type="text" placeholder="ID" ref="userName" />
         		<input type="text" placeholder="输入：123" ref="userPassword" />
@@ -69,23 +58,38 @@ class Box extends React.Component { 
 			message: [],
 		}
 	}
-	getUser() {
+	getEverything() {
 		let msgList = [];
 		socket.on('loginUser', (onuser, info) => {
-			console.log('在线用户: ' + onuser);
-			console.log('人数' + onuser.length);
+			console.log('在线: ' + onuser + '   人数:' + onuser.length);
 			this.setState({
 				onlineuser: onuser,
 				onlinenum: onuser.length,
 				newlogin: onuser[onuser.length - 1] + "加入了",
 			})
 			if (!info) {
-				let x = document.getElementById('login');
-				x.style.display = 'block';
-				setTimeout(() => {
-					x.style.display = 'none';
-				}, 5000)
+				$('#loginTooltip').slideDown("slow", () => {
+					setTimeout(() => {
+						$('#loginTooltip').fadeOut('fast')
+					}, 3000)
+				})
 			}
+			let a = 1;
+			let m = $('#mobMenu');
+			let u = $('#userlist');
+			m.click(() => {
+				if (a === 1) {
+					u.animate({
+						marginLeft: '3%'
+					}, 'fast')
+					a = 0;
+				} else {
+					u.animate({
+						marginLeft: '-30%'
+					}, 'fast');
+					a = 1;
+				}
+			})
 		})
 		socket.on(`msg`, msg => {
 			console.log('战舰状态:', msg.message, msg.userName);
@@ -95,28 +99,27 @@ class Box extends React.Component { 
 				'message': msgList,
 			})
 			let allS = document.querySelectorAll('#showmsg span')
-			console.log(allS)
-			console.log(allS[0].innerHTML)
-			for(let i=0; i< allS.length;i++ ) {
-				if(allS[i].innerHTML === theUserName ) {
-					allS[i].nextSibling.className="thisuser"
+			for (let i = 0; i < allS.length; i++) {
+				if (allS[i].innerHTML === theUserName) {
+					allS[i].nextSibling.className = "thisuser"
 				}
 			}
+			$('#showmsg').scrollTop($('#showmsg')[0].scrollHeight)
 		})
 		socket.on('quit', quitinfo => {
 			console.log('用户退出:' + quitinfo);
 			this.setState({
 				quituser: quitinfo + "退出了",
 			})
-			let y = document.getElementById('quit');
-			y.style.display = 'block';
-			setTimeout(() => {
-				y.style.display = 'none';
-			}, 5000)
+			$('#quitTooltip').slideDown("slow", () => {
+				setTimeout(() => {
+					$('#quitTooltip').fadeOut('fast')
+				}, 3000)
+			})
 		})
 	}
 	componentDidMount() {
-		this.getUser();
+		this.getEverything();
 	}
 	handleMessageSubmit(message) {
 		socket.emit(`msg`, {

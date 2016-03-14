@@ -28,14 +28,49 @@ body {
 	height:100%;
 	margin:0px;
 	padding:0px;
-	background: -webkit-linear-gradient(20deg, #accd3a, #2bc792);
+	background:#F5F5F5;
+	/*background: -webkit-linear-gradient(20deg, #accd3a, #2bc792);*/
 }
 h1,h2,h3,h4 {
 	margin:0px
 }
+header {
+	height:5%;
+	width:100%;
+	color:#000;
+	background:#fff;
+	border-bottom:1px solid #dbdbdb;
+}
+header h1 {
+	display:inline-block;
+	margin-left:15%;
+}
+header a {
+	color:#000;
+	text-decoration:none;
+}
+header ul {
+	display:inline-block;
+	position:absolute;
+	right:15%;
+	margin:0.5rem;
+}
+header ul li {
+	display:inline-block;
+	list-style-type:none;
+	padding:0.3rem;
+}
+header ul li:hover {
+	background:#000;
+	color:#fff;
+	border-radius:0.2rem;
+}
+header ul li a:hover {
+	color:#fff;
+}
 #chat {
 	width:100%;
-	height:100%;
+	height:94%;
 	padding:0;
 	margin:0;
 	display:flex;
@@ -46,7 +81,7 @@ h1,h2,h3,h4 {
 #loginbox {
 	width:20%;
 	text-align:center;
-	color:#fff;
+	color:#000;
 }
 #loginbox input {
 	display:block;
@@ -57,39 +92,50 @@ h1,h2,h3,h4 {
 #chatroom {
 	width:90%;
 	height:90%;
+	/*background:#fff;*/
+	border-radius:0.3rem;
 }
 #msgbox {
 	width:100%;
-	height:80%;
+	height:90%;
 	display:flex;
 	flex-direction:row;
 }
-#msgbox > div:nth-child(1) {
+#userlist {
 	width:15%;
 	flex:0 0 auto;
-	color:#fff;
+	color:#000;
+	border-radius:0.5rem;
+	border-right:0.5rem solid #fff;
 }
-#msgbox > div:nth-child(1) ul{
+#userlist ul{
 	list-style-type:none;
 	padding:0px;
 }
-#msgbox > div:nth-child(1) ul li {
-	border-left:0.5rem solid #fff;
+#userlist ul li {
+/*	border-left:0.5rem solid #fff;
+	border-radius:0.5rem;
 	padding-left:0.5rem;
-	margin-bottom:0.5rem;
+*/	margin-bottom:0.5rem;
+	/*background:#fff;*/
 }
-#msgbox > div:nth-child(2) {
-	/*border:3px solid #fff;*/
+#userlist ul span {
+	background:#fff;
+	padding:0.2rem 0.3rem;
+	border-radius:0.3rem;
+}
+#showmsg {
 	width:85%;
+	margin:0 3%;
 	flex:0 1 auto;
 	overflow:auto;
 }
-#msgbox > div:nth-child(2) div {
+#showmsg div {
 	display:flex;
 	flex-direction:row;
 	align-items:flex-start;
 }
-#msgbox > div:nth-child(2) p {
+#showmsg p {
 	background:#fff;
 	max-width:90%;
 	margin-top:0px;
@@ -97,19 +143,21 @@ h1,h2,h3,h4 {
 	padding:0.5rem;
 	border-radius:0.3rem;
 }
-#msgbox > div:nth-child(2) span {
-	color:#fff;
+#showmsg div span {
+	color:#000;
+	white-space:nowrap;
 }
-#msgbox > div:nth-child(2) span::after {
+#showmsg div span::after {
 	content:'：';
 }
 #submsg {
-	height:20%;
+	height:10%;
 	display:flex;
 }
 #submsg textarea {
-	width:80%;
+	width:65%;
 	height:100%;
+	margin-left:15%;
 }
 #submsg input {
 	width:20%;
@@ -121,8 +169,65 @@ h1,h2,h3,h4 {
 }
 .tooltip {
     position:fixed;
-    top:1rem;
+    top:5%;
     left:50%;
+    color:#fff;
+    background:#7c7c7c;
+    padding:0.2rem 0.5rem;
+    border-radius:0.2rem;
     transform:translateX(-50%);
     transition:top 1s;
+}
+.tooltipa {
+    position:fixed;
+    top:3%;
+    left:50%;
+    font-size:0.8rem;
+    transform:translateX(-50%);
+    transition:top 1s;
+}
+#mobMenu {
+	display:none;
+}
+@media (max-width: 640px) {
+	#chatroom {
+		width:100%;
+		height:100%;
+	}
+	#userlist {
+		margin-left:-30%;
+		border:0;
+		border-radius:1px;
+		width:20%;
+		background:#fff;
+		position:absolute;
+	}
+	#userlist ul span {
+		color:#fff;
+		background:#6F6F6F;
+	}
+	#showmsg {
+		width:100%;
+		height:100%;
+	}
+	#chatroom {
+		margin-top:3%;
+	}
+	#submsg {
+		height:5%;
+	}
+	#submsg textarea {
+		width:80%;
+		margin-left:1rem;
+	}
+	header h1 {
+		margin-left:1rem;
+		font-size:1rem;
+	}
+	#mobMenu {
+		display:inline;
+		margin-left:1rem;
+		font-size:2rem;
+		cursor:pointer;
+	}
 }

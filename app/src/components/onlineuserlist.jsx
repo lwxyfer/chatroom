@@ -23,7 +23,7 @@ export default class OnlineUserList extends React.Component {
 class OnlineList extends React.Component {
 	render() {
 		return (
-			<li>{ this.props.data }</li>
+			<li><span>{ this.props.data }</span></li>
 		)
 	}
 }
