@@ -4,6 +4,7 @@ DEMO：http://ccchat.coding.io/
 
 It's a project for learning ES2015 & React.js & Node.js
 
+provide basic chat & an AI what you can teach
 
 ## server
 
@@ -90,6 +91,7 @@ node server.js
     - UI
     - ctrl + enter  to send message
     - keep scroll bar in bottom
+    - add TURING Robot
 
 
 # support
