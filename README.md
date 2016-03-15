@@ -2,24 +2,21 @@
 
 DEMO：http://ccchat.coding.io/
 
-为学习react和ES2015而建立的项目
+It's a project for learning ES2015 & React.js & Node.js
 
-# 简介
-
-整个项目分为：server端 和 client端 
 
 ## server
 
-后端
+Back-end
 
-- 使用Node.js
-- 使用express建立HTTP服务，通过express.static内置中间件函数来访问页面。
-- WebSocket实现实时通讯。使用开源工具 [socket.io](http://socket.io/)
-- 未使用数据库，直接储存在内存中。
+- Node.js
+- use express to start a HTTP server
+- WebSocket provide full-duplex connection. use open source tool [socket.io](http://socket.io/)
+- no database
 
 ## client
 
-前端：
+Front-end：
 
 - react
 - react-dom
@@ -27,28 +24,28 @@ DEMO：http://ccchat.coding.io/
 - webpack
 - socket.io-client
 
-# 结构以及简介
+# structure
 
-下面是整个项目的结构和配置
+directory and intro
 
 ```
 - chatroom
     - app                        //client 
         - build
-            - build.js           // webpack打包output
+            - build.js           // webpack output file
         - src
-            - components         // react组件，使用babel处理jsx文件
+            - components         // react components, jsx
                 onlineuserlist.jsx
                 showmsg.jsx
                 submsg.jsx
-            - css                // 样式文件，没有用webpack打包
+            - css                // stylesheet, use link to reference not webpack
                 - style.css
-            - index.jsx          // webpack 入口文件
-        - .babelrc               // babel 配置
-        - index.html             // 应用主页
-        - webpack.config.js      // webpack配置文件
-    - package.json           // npm 包管理
-    - server.js              // 后端文件，通过命令node server.js 即可启动http服务
+            - index.jsx          // webpack entry
+        - .babelrc               // babel config
+        - index.html             // app index
+        - webpack.config.js      // webpack config
+    - package.json           // npm package.json
+    - server.js              // `node server.js` to start server
 ```
 
 run:
@@ -65,25 +62,21 @@ open http://localhost:3000 to visit
 build:
 
 ```
-//client:在app文件夹里运行webpack打包，没有定义npm命令
+//FE: use webpack command in `app` folder 
 cd app
 webpack --progress --colors  
 
-// server
+// BE: default:http://localhost:3000
 node server.js
 ```
 
-
 # TODO
 
-还有很多要去做的：
-
-- 使用redux
-- 提供普通的账号和邮箱注册功能
-- 使用数据库存储数据
-- 添加私聊，群组的功能
-- 对消息提供基本的富文本功能
-- 简化代码，提高性能
+- redux
+- provide register function
+- use database
+- private chat with others
+- change text size & color
 
 
 # changelog
@@ -93,4 +86,14 @@ node server.js
     - use flex
     - highlight text
 
-only test chrome（chrome大法好）
+- 2016/3/14
+    - UI
+    - ctrl + enter  to send message
+    - keep scroll bar in bottom
+
+
+# support
+
+I just test chrome (chrome dafa hao)
+
+
