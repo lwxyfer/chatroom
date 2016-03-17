@@ -28,8 +28,7 @@ io.on('connection', function(socket) {
 	});
 	socket.on('msg', function(msg) {
 		io.emit('msg', msg);
-		var robotMsg = robot(msg.message);
-		console.log('robot===' + robotMsg);
+		robot(msg.message);
 		console.log(msg.userName + ':' + msg.message)
 	})
 	socket.on('disconnect', function() {
@@ -50,7 +49,7 @@ server.listen(3000, function() {
 
 function robot(mmm) {
 	var bodyQueryStr = {
-		key: '', // TURING key here
+		key: '955f2c294c33e3ddbabdb8d461d50d34', // TURING key here
 		info: mmm,
 		userid: '123',
 	};
