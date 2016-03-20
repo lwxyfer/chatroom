@@ -4,6 +4,7 @@
   "description": "react   redux   webpakc  bable  websocket",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -26,5 +27,8 @@
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "style-loader": "^0.13.0"
+  },
+  "engines": {
+    "node": "4.3.1"
   }
 }
