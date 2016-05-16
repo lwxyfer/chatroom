@@ -15,7 +15,7 @@ export default class SubMsg extends React.Component { 
 	render() {
 		return (
 			<form id="submsg" onSubmit={this.handleSubmit.bind(this)}>
-        		<textarea ref="message" placeholder="ctrl+enter"></textarea>
+        		<textarea ref="message" placeholder="ctrl+enter" wrap="hard"></textarea>
         		<input value="BiuBiuBiu" type="submit" />
       		</form>
 		);

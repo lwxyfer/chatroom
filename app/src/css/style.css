@@ -1,4 +1,3 @@
-
 button,
 html input[type="button"], /* 1 */
 input[type="reset"],
@@ -189,6 +188,12 @@ header ul li a:hover {
 #mobMenu {
 	display:none;
 }
+
+/**
+ * For mobile device
+ * @param  {[type]} max-width: 640px         [description]
+ * @return {[type]}            [description]
+ */
 @media (max-width: 640px) {
 	html {
 		font-size:80%;

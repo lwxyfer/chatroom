@@ -1,10 +1,13 @@
 import io from 'socket.io-client';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import marked from 'marked';
 import OnlineUserList from './components/onlineuserlist.jsx';
 import SubMsg from './components/submsg.jsx';
 import ShowMsg from './components/showmsg.jsx';
+import { ale } from './components/commontest.js';
 
+ale();
 let socket = io.connect('http://localhost:3000');
 let logStateInfo = true;
 let theUserName = null;

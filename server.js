@@ -42,12 +42,19 @@ io.on('connection', function(socket) {
 	});
 });
 
+/**
+ * 服务端连接设置
+ */
 server.listen(process.env.PORT || 3000, function() {
 	console.log('listening on *:3000');
 	console.log('servre running');
 });
 
 
+/**
+ * [chat robot]
+ * By AI , provide weather, express and some function
+ */
 function robot(mmm) {
 	var bodyQueryStr = {
 		key: '955f2c294c33e3ddbabdb8d461d50d34', // TURING key here
@@ -57,6 +64,7 @@ function robot(mmm) {
 	var contentStr = querystring.stringify(bodyQueryStr);
 	var contentLen = Buffer.byteLength(contentStr, 'utf8');
 	console.log(util.format('post data: %s, with length: %d', contentStr, contentLen));
+	// post 请求设置
 	var options = {
 		hostname: 'www.tuling123.com',
 		path: '/openapi/api',
