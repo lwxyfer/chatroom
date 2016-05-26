@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-	<meta charset="UTF-8">
-	<title>chatRoom</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport">
-	<link rel="stylesheet" href="./src/css/style.css">
-<!-- 	<script src="//cdn.jsdelivr.net/emojione/2.1.1/lib/js/emojione.min.js"></script>
+    <meta charset="UTF-8">
+    <title>chatRoom</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <!-- 	<script src="//cdn.jsdelivr.net/emojione/2.1.1/lib/js/emojione.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.1.1/assets/css/emojione.min.css"/> -->
 </head>
+
 <body>
-	<header>
-		<span id="mobMenu">:::</span>
-		<h1>吹BI</h1>
-		<ul>
-		<li><a href="http://lwxyfer.github.io/chatroom">Github</a></li>
-		<span> | </span>
-		<li>关于</li>
-		</ul>
-	</header>
+    <header>
+        <span id="mobMenu">:::</span>
+        <h1>吹BI</h1>
+        <ul>
+            <li><a href="https://github.com/lwxyfer/chatroom">Github</a></li>
+            <span> | </span>
+            <li>关于</li>
+        </ul>
+    </header>
     <div id="chat"></div>
     <div id="loading">0</div>
     <script type="text/javascript">
-    	var load = document.getElementById('loading');
-    	console.log(load.innerText);
-    	for(var i=0;i<100;i++) {
-    	if(load.innerText < 90) {
-    		load.innerText = load.innerText + 1
-    	}
-    	else {
-    		return true;
-    	}
-    }
     </script>
-	<script src="./build/build.js"></script>
+    <script src="./build/build.js"></script>
 </body>
+
 </html>
