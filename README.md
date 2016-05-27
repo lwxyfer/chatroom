@@ -1,6 +1,6 @@
 # chatroom
 
-DEMO：http://ccchat.coding.io/
+DEMO：https://chatroom-lwxyfer.c9users.io/
 
 It's a project for learning ES2015 & React.js & Node.js
 
