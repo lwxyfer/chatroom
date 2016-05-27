@@ -148,7 +148,14 @@ header ul li a:hover {
     padding: 0.2rem 0.3rem;
     border-radius: 0.3rem;
 }
-
+.userMsg {
+    background: #fff;
+    border-radius:5px;
+    padding: 0.5rem;
+}
+.userMsg p {
+    margin:0.3rem;
+}
 #showmsg {
     width: 85%;
     margin: 0 3%;
@@ -156,20 +163,13 @@ header ul li a:hover {
     overflow: auto;
 }
 
-#showmsg div {
+#showmsg > div {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    margin:0.5rem 0;
 }
 
-#showmsg p {
-    background: #fff;
-    max-width: 90%;
-    margin-top: 0px;
-    display: inline-block;
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-}
 
 #showmsg div span {
     color: #000;
@@ -194,6 +194,11 @@ header ul li a:hover {
 .thisuser {
     background: #5EC1F7 !important;
     color: #fff;
+    border-radius:5px;
+    padding:0.5rem;
+}
+.thisuser p {
+    margin:0.3rem;
 }
 
 .tooltip {

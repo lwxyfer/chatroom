@@ -37675,7 +37675,7 @@
 						null,
 						this.props.data.userName
 					),
-					_react2.default.createElement('div', { className: this.props.pClass, dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.data.message) } })
+					_react2.default.createElement('div', { className: 'userMsg', dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.data.message) } })
 				);
 			}
 		}]);

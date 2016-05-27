@@ -31,7 +31,7 @@ class MessageList extends React.Component {
 		return (
 			<div>
 				<span>{ this.props.data.userName }</span>
-				<div className={this.props.pClass} dangerouslySetInnerHTML= {{ __html:marked(this.props.data.message) }} ></div>
+				<div className='userMsg' dangerouslySetInnerHTML= {{ __html:marked(this.props.data.message) }} ></div>
 			</div>
 		)
 	}
