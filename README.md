@@ -79,6 +79,7 @@ node server.js
 - private chat with others
 - change text size & color
 - web cache
+- rewrite css
 
 # changelog
 
