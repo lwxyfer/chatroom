@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import OnlineUserList from './onlineuserlist.jsx';
 import SubMsg from './submsg.jsx';
 import ShowMsg from './showmsg.jsx';
-import { socket ,logStateInfo,onlineUser,theUserName} from './login.jsx'
+import {xtest, ytest ,socket,logStateInfo,onlineUser,theUserName} from './login.jsx';
+
+console.log('测试导入')
 
 export default class ChatBox extends React.Component { 
 	constructor() {
@@ -12,6 +14,12 @@ export default class ChatBox extends React.Component { 
 			onlineuser: [],
 			message: [],
 		}
+	}
+	componentDidMount() {
+		this.getEverything();
+		console.log('test========='+xtest); 
+		let url = 'chatroom+userName=' + theUserName;
+		window.history.pushState(null,'chatroom',url)
 	}
 	getEverything() {
 		let msgList = [];
@@ -73,10 +81,8 @@ export default class ChatBox extends React.Component { 
 			})
 		})
 	}
-	componentDidMount() {
-		this.getEverything();
-	}
 	handleMessageSubmit(message) {
+		console.log('发送测试',theUserName);
 		socket.emit(`msg`, {
 			'message': message,
 			'userName': theUserName,
@@ -92,3 +98,5 @@ export default class ChatBox extends React.Component { 
 				</div>)
 	}
 }
+
+console.log(xtest)

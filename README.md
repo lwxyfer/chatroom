@@ -80,7 +80,6 @@ node server.js
 - change text size & color
 - web cache
 
-
 # changelog
 
 - 2016/3/10
