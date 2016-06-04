@@ -81,6 +81,8 @@ node server.js
 - web cache
 - rewrite css
 
+react-router $ redux to finish the whole application
+
 # changelog
 
 - 2016/3/10

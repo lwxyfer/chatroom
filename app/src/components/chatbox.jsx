@@ -3,23 +3,31 @@ import ReactDOM from 'react-dom';
 import OnlineUserList from './onlineuserlist.jsx';
 import SubMsg from './submsg.jsx';
 import ShowMsg from './showmsg.jsx';
-import {xtest, ytest ,socket,logStateInfo,onlineUser,theUserName} from './login.jsx';
+import {
+	xtest,
+	ytest,
+	socket,
+	logStateInfo,
+	onlineUser,
+	theUserName
+} from './login.jsx';
 
 console.log('测试导入')
+console.log(xtest)
 
-export default class ChatBox extends React.Component { 
+export default class ChatBox extends React.Component {
 	constructor() {
 		super()
 		this.state = {
 			onlineuser: [],
-			message: [],
+			message: []
 		}
 	}
 	componentDidMount() {
 		this.getEverything();
-		console.log('test========='+xtest); 
+		console.log('test=========' + xtest);
 		let url = 'chatroom+userName=' + theUserName;
-		window.history.pushState(null,'chatroom',url)
+		window.history.pushState(null, 'chatroom', url)
 	}
 	getEverything() {
 		let msgList = [];
@@ -28,7 +36,7 @@ export default class ChatBox extends React.Component { 
 			this.setState({
 				onlineuser: onuser,
 				onlinenum: onuser.length,
-				newlogin: onuser[onuser.length - 1] + "加入了",
+				newlogin: onuser[onuser.length - 1] + "加入了"
 			})
 			if (!info) {
 				$('#loginTooltip').slideDown("slow", () => {
@@ -59,7 +67,7 @@ export default class ChatBox extends React.Component { 
 			msg.token = new Date().getTime();
 			msgList.push(msg);
 			this.setState({
-				'message': msgList,
+				'message': msgList
 			})
 			let allS = document.querySelectorAll('#showmsg span')
 			for (let i = 0; i < allS.length; i++) {
@@ -72,7 +80,7 @@ export default class ChatBox extends React.Component { 
 		socket.on('quit', quitinfo => {
 			console.log('用户退出:' + quitinfo);
 			this.setState({
-				quituser: quitinfo + "退出了",
+				quituser: quitinfo + "退出了"
 			})
 			$('#quitTooltip').slideDown("slow", () => {
 				setTimeout(() => {
@@ -82,21 +90,21 @@ export default class ChatBox extends React.Component { 
 		})
 	}
 	handleMessageSubmit(message) {
-		console.log('发送测试',theUserName);
+		console.log('发送测试', theUserName);
 		socket.emit(`msg`, {
 			'message': message,
-			'userName': theUserName,
+			'userName': theUserName
 		})
 	}
-	render() {  
-		return (<div id="chatroom">
-				<div id="msgbox">
-					<OnlineUserList userList={ this.state.onlineuser } userNum={ this.state.onlinenum} />
-					<ShowMsg messageList={ this.state.message } newlogin={ this.state.newlogin } quitUser={ this.state.quituser }/>
-				</div>
-				<SubMsg onMessageSubmit={ this.handleMessageSubmit.bind(this) } />
-				</div>)
+	render() {
+		return (
+			<div id="chatroom">
+                <div id="msgbox">
+                    <OnlineUserList userList={this.state.onlineuser} userNum={this.state.onlinenum}/>
+                    <ShowMsg messageList={this.state.message} newlogin={this.state.newlogin} quitUser={this.state.quituser}/>
+                </div>
+                <SubMsg onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
+            </div>
+		)
 	}
 }
-
-console.log(xtest)

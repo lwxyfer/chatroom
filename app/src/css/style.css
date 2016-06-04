@@ -179,7 +179,10 @@ header ul li a:hover {
 #showmsg div span::after {
     content: '：';
 }
-
+#showmsg img {
+    width:80%;
+    height:auto;
+}
 #submsg {
     height: 10%;
     display: flex;

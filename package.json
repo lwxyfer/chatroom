@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd app && webpack --colors --progress"
+    "build": "cd app && webpack --colors --progress --watch",
+    "production": "cd app && webpack -p"
   },
   "author": "",
   "license": "ISC",

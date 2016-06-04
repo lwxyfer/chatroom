@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 module.exports = {
     entry: "./src/index.jsx",
     output: {
@@ -15,9 +17,6 @@ module.exports = {
             test: /.jsx?$/,
             loader: 'babel-loader',
             exclude: /node_modules/,
-            query: {
-                presets: ['es2015', 'react']
-            }
         }]
     },
     plugins: [
@@ -25,6 +24,13 @@ module.exports = {
             "$": "jquery",
             "jQuery": "jquery",
             "window.jQuery": "jquery",
-        })
+        }),
+        // new uglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
+        // 分离公共代码，
+        // production
     ]
 };
