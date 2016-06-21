@@ -1,6 +1,9 @@
 # chatroom
 
-DEMO：https://chatroom-lwxyfer.c9users.io/
+> DEMO：https://chatroom-lwxyfer.c9users.io/
+> online editor : https://ide.c9.io/lwxyfer/chatroom
+> 在线演示版本落后仓库版本
+> POWERED BY C9.IO
 
 It's a project for learning ES2015 & React.js & Node.js
 
@@ -31,7 +34,7 @@ directory and intro
 
 ```
 - chatroom
-    - app                        //client 
+    - app                        //client
         - build
             - build.js           // webpack output file
         - src
@@ -63,13 +66,17 @@ open http://localhost:3000 to visit
 build:
 
 ```
-//FE: use webpack command in `app` folder 
+//FE: use webpack command in `app` folder
 cd app
 webpack --progress --colors  
 
 // BE: default:http://localhost:3000
 node server.js
 ```
+
+# screenshot
+
+![](http://ww3.sinaimg.cn/large/baa2d901jw1f52nv02v78j218e0q0gql.jpg)
 
 # TODO
 
@@ -95,7 +102,7 @@ react-router $ redux to finish the whole application
     - ctrl + enter  to send message
     - keep scroll bar in bottom
     - add TURING Robot
-    
+
 - 2016/4/1
     - emoji
     - formatting text
@@ -103,6 +110,3 @@ react-router $ redux to finish the whole application
 # support
 
 I just test chrome (chrome dafa hao)
-
-
-
